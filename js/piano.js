@@ -7,7 +7,9 @@ var note_element_bass = $(".note_sheet.bass .note").children("span");
 var note_accidental_bass = note_element_bass.find("span");
 
 function getNote() {
-  note = "";
+  var note = "";
+  var bassup = false;
+  var created = false;
 	var random_key = Math.round(Math.random()*6);
 	var random_acc = Math.round(Math.random()*3);
 	if ($(".bass").is(":visible")) {
@@ -26,7 +28,7 @@ function getNote() {
 
   if (notes.indexOf(onlyNote) < 3 && onlyOct == 2) {
     onlyOct = onlyOct + 1;
-  } else if (notes.indexOf(onlyNote) == note[3] && onlyOct == 2 && onlyAcc == " flat") {
+  } else if (notes.indexOf(onlyNote) == 3 && onlyOct == 2 && onlyAcc == " flat") {
   	onlyAcc = accidentals[Math.round(Math.random()*2)];
   }
 
@@ -34,42 +36,53 @@ function getNote() {
 	
   	if ($(".bass").is(":visible")) {
   		if (onlyOct < 4) {
-	  		note_element_bass.addClass('note-' + onlyNote + onlyOct);
-	  		note_accidental_bass.addClass(onlyAcc);
-	  		var bassup = false;
+  			if (onlyOct == 3 && notes.indexOf(onlyNote) > 3 && ! Math.round(Math.random()*2)) {
+  				// displaying bass note in treble clef
+  				note_element.addClass('note-' + onlyNote + onlyOct + "-treble");
+		  		note_accidental.addClass(onlyAcc);
+		  		created = true;
+  			} else {
+		  		note_element_bass.addClass('note-' + onlyNote + onlyOct);
+		  		note_accidental_bass.addClass(onlyAcc);
+		  		var bassup = true;
+		  	}
 	  	}
-  		else if (onlyOct == 4 && notes.indexOf(onlyNote) < 6) {
+  		else if (onlyOct == 4 && notes.indexOf(onlyNote) < 6 && Math.round(Math.random()*2)) {
+  			// displaying treble note in bass clef
   			note_element_bass.addClass('note-' + onlyNote + onlyOct + "-bass bassup");
   			note_accidental_bass.addClass(onlyAcc);
   			var bassup = true;
-  		} else {
-  			note_element.addClass('note-' + onlyNote + onlyOct);
-	  		note_accidental.addClass(onlyAcc);
-	  		var bassup = false;
   		}
-  	} else {
+  	}
+  	if (! bassup && ! created) {
   		note_element.addClass('note-' + onlyNote + onlyOct);
   		note_accidental.addClass(onlyAcc);
-  		var bassup = false;
   	}
 	
 	return [note, bassup];
 }
 
 function removeNote(guessedNote, checkBass) {
-	if (guessedNote[1] > 3) {
-		if (checkBass) {
+	if (checkBass) {
+		if (guessedNote[1] > 3) {
+			// means it was treble note in bass clef
 			note_element_bass.removeClass('note-' + guessedNote[0] + guessedNote[1] + "-bass");
 			note_element_bass.removeClass("bassup");
   			note_accidental_bass.removeClass(guessedNote.slice(3));
-	  	} else {
+		} else {
+			note_element_bass.removeClass('note-' + guessedNote[0] + guessedNote[1]);
+	  		note_accidental_bass.removeClass(guessedNote.slice(3));
+		}
+  	} else {
+  		if (guessedNote[1] == 3) {
+  			// means it was bass note in treble clef
+  			note_element.removeClass('note-' + guessedNote[0] + guessedNote[1] + "-treble");
+	  		note_accidental.removeClass(guessedNote.slice(3));
+  		} else {
 			note_element.removeClass('note-' + guessedNote[0] + guessedNote[1]);
 	  		note_accidental.removeClass(guessedNote.slice(3));
 	  	}
-	} else {
-		note_element_bass.removeClass('note-' + guessedNote[0] + guessedNote[1]);
-  		note_accidental_bass.removeClass(guessedNote.slice(3));
-	}
+  	}
 }
 
 function ambigNote (taskNote) {

@@ -2,20 +2,12 @@
 .note-e2:before,
 .note-c4:before,
 .note-a5:before,
-
 .note-c4-bass:before,
-.note-d4-bass:before,
 .note-e4-bass:before,
-.note-f4-bass:before,
 .note-g4-bass:before,
-.note-a4-bass:before,
-
-.note-g4-bass:after,
-.note-a4-bass:after,
-
-.note-b3-treble:before,
-.note-a3-treble:before,
-.note-g3-treble:before {
+.note-d4-bass:before,
+.note-f4-bass:before,
+.note-a4-bass:before {
   border-bottom: 2px solid;
   color: #454545;
   content: "";
@@ -30,18 +22,9 @@
 .note-a5:before {
     top: 82%;
 }
-
-.note-g3-treble:before {
-  top: 38%;
-}
-.note-a3-treble:before {
-  top: 53%;
-}
-.note-b3-treble:before {
-  top: 66%;
-}
-
 /* upper notes strikethroughs */
+
+
 .note-c4-bass:before,
 .note-e4-bass:before,
 .note-g4-bass:before {
@@ -55,6 +38,24 @@
   top: 56.5%;
 }
 
+.note-e4-bass:before,
+.note-f4-bass:before {
+  height: 15px;
+  border-top: 2px solid;
+}
+
+.note-g4-bass:after,
+.note-a4-bass:after {
+  border-bottom: 2px solid;
+  color: #454545;
+  content: "";
+  position: absolute;
+  width: 35px;
+  right: -27%;
+  
+  height: 15px;
+  border-top: 2px solid;
+}
 .note-g4-bass:after {
   top: 65.5%;
 }
@@ -62,15 +63,7 @@
   top: 72.5%;
 }
 
-.note-e4-bass:before,
-.note-f4-bass:before,
-.note-a3-treble:before,
-.note-g3-treble:before,
-.note-g4-bass:after,
-.note-a4-bass:after {
-  height: 15px;
-  border-top: 2px solid;
-}
+
 
 
 /* Bass notes */
@@ -78,7 +71,10 @@
 .note-e2 {
   top: 67px;
   left: 170px;
+
 }
+
+
 
 .note-f2 {
   top: 59px;
@@ -138,6 +134,7 @@
 .note-c4-bass {
   top: -35px;
   left: 160px;  
+  position: relative;
 }
 
 .note-d4-bass {
@@ -149,7 +146,6 @@
   top: -52px;
   left: 180px;
 }
-
 .note-f4-bass {
   top: -60px;
   left: 180px;
@@ -166,25 +162,22 @@
 }
 
 /* Treble Notes */
-.note-g3-treble {
-  top: 93px;
-  left: 200px;
-}
-
-.note-a3-treble {
-  top: 84px;
-  left: 200px;
-}
-
-.note-b3-treble {
-  top: 76px;
-  left: 200px;
-}
 
 .note-c4 {
   top: 67px;
   left: 170px;
+
 }
+/*.note-c4:before,
+.note-a5:before {
+    border-bottom: 2px solid;
+    color: #454545;
+    content: "";
+    position: absolute;
+    width: 35px;
+    right: -27%;
+    top: 82%;
+}*/
 
 .note-d4 {
   top: 59px;
@@ -243,5 +236,6 @@
 
 .note-a5 {
   top: -35px;
-  left: 160px;
+  left: 160px;  
+  position: relative;
 }
